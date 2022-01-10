@@ -7,7 +7,7 @@ public class Huntress : MonoBehaviour
 
     //left off video at 1:46 - section 11 obstacles
 
-    private int moveSpeed = 10;
+    [SerializeField] private int moveSpeed = 10;
     //private Animation anim;
     private bool crouching = false;
     private bool jumping = false;
@@ -35,6 +35,7 @@ public class Huntress : MonoBehaviour
         animator.SetFloat("Speed", Mathf.Abs(horizontalMove));
 
         if (Input.GetButtonDown("Jump")) {
+            Debug.Log("jumping");
             jumping = true;
             animator.SetBool("isJumping", true);
         }

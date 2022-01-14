@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Huntress : MonoBehaviour
 {
@@ -45,6 +46,10 @@ public class Huntress : MonoBehaviour
         } 
         else if (Input.GetButtonUp("Crouch")) {
             crouching = false;
+        }
+
+        if (Input.GetButtonDown("Cancel")) {
+            SceneManager.LoadScene("MainMenu");
         }
     }
 

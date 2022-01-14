@@ -4,5 +4,20 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/MainMenu.unity
+    guid: 03c51aca6ddf61d49af8b253b853828d
+  - enabled: 1
+    path: Assets/Scenes/MummyScene.unity
+    guid: bc35f6ae52b2ad242842f24a7a321e74
+  - enabled: 1
+    path: Assets/Scenes/WerewolfVillage.unity
+    guid: 5a717babe89de3947a79f60c2a3deeb0
+  - enabled: 1
+    path: Assets/Scenes/Defeat.unity
+    guid: 82c920594d29cf6498e51836ee9d3747
+  - enabled: 1
+    path: Assets/Scenes/Victory.unity
+    guid: 767c6d341e877f4498dbaca5860179e9
   m_configObjects: {}

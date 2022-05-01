@@ -36,7 +36,7 @@ public class Huntress : MonoBehaviour
         animator.SetFloat("Speed", Mathf.Abs(horizontalMove));
 
         if (Input.GetButtonDown("Jump")) {
-            Debug.Log("jumping");
+            //Debug.Log("jumping");
             jumping = true;
             animator.SetBool("isJumping", true);
         }
@@ -61,7 +61,7 @@ public class Huntress : MonoBehaviour
 
     public void OnLanding() {
         animator.SetBool("isJumping", false);
-        Debug.Log("landed");
+        //Debug.Log("landed");
     }
 
     private void OnMouseUp()

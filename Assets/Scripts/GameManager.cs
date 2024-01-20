@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public void PlayGame() {
-        SceneManager.LoadScene("MummyScene");
+        SceneManager.LoadScene(SceneNamesEnum.MummyScene1Intro.ToString());
     }
 
     public void SaveGame() {
@@ -15,7 +15,7 @@ public class GameManager : MonoBehaviour
 
     public void MummyDefeatedSaveContinue() {
         SaveGame();
-        SceneManager.LoadScene("WerewolfVillage");
+        SceneManager.LoadScene(SceneNamesEnum.WerewolfVillage1Intro.ToString());
     }
 
     public void QuitGame() {
@@ -24,13 +24,13 @@ public class GameManager : MonoBehaviour
     }
 
     public void LoadMainMenu() {
-        SceneManager.LoadScene("MainMenu");
+        SceneManager.LoadScene(SceneNamesEnum.MainMenu.ToString());
     }
 
     void Update()
     {
         if (Input.GetButtonDown("Cancel")) {
-            SceneManager.LoadScene("MainMenu");
+            SceneManager.LoadScene(SceneNamesEnum.MainMenu.ToString());
         }
     }
 }

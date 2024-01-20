@@ -7,7 +7,7 @@ public class DeathZone : MonoBehaviour
 {
     void OnCollisionEnter2D(Collision2D collision) {
         if (collision.collider.CompareTag("Player")) {
-            SceneManager.LoadScene("Defeat");
+            SceneManager.LoadScene(SceneNamesEnum.Defeat.ToString());
             //GameObject.FindWithTag("Player").GetComponent<PlayerMovement>().LoseLife();
         }
     }

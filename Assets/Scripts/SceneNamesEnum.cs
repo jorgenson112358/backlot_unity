@@ -4,11 +4,12 @@ using UnityEngine;
 
 public enum SceneNamesEnum {
     Defeat,
+    GameVictory,
     MainMenu,
     MummyScene1Intro,
-    GameVictory,
     MummyVictory,
+    Vampire1Intro,
     WerewolfVillage1Intro,
-    Vampire1Intro
+    WerewolfVictory
 };
 

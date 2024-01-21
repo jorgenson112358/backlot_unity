@@ -23,6 +23,10 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(SceneNamesEnum.Vampire1Intro.ToString());
     }
 
+    public void VampireDefeatedGameVictory() {
+        SceneManager.LoadScene(SceneNamesEnum.GameVictory.ToString());
+    }
+
     public void QuitGame() {
         Debug.Log("quitting");
         Application.Quit();

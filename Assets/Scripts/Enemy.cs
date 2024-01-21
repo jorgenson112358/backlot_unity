@@ -48,6 +48,8 @@ public class Enemy : MonoBehaviour
         GetComponent<Collider2D>().enabled = false;
         this.enabled = false;
 
-        gm.WerewolfDefeatedSaveContinue();
+        if (IsWerewolf) {
+            gm.WerewolfDefeatedSaveContinue();
+        }
     }
 }

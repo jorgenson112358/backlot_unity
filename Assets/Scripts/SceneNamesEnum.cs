@@ -8,6 +8,7 @@ public enum SceneNamesEnum {
     MummyScene1Intro,
     GameVictory,
     MummyVictory,
-    WerewolfVillage1Intro
+    WerewolfVillage1Intro,
+    Vampire1Intro
 };
 

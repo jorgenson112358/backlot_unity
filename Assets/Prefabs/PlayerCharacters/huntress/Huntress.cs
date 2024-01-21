@@ -63,11 +63,6 @@ public class Huntress : MonoBehaviour
         else if (Input.GetButtonUp("Crouch")) {
             crouching = false;
         }
-
-        // if (Input.GetButtonDown("Cancel")) {
-        //     SceneManager.LoadScene(SceneNamesEnum.MainMenu.ToString());
-        // }
-
     }
 
     void FixedUpdate()

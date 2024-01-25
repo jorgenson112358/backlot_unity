@@ -10,6 +10,7 @@ public class Enemy : MonoBehaviour
     int currentHealth;
     public Animator animator;
     public GameManager gm;
+    private float disappearAfterDeathTime = 5f;
 
     // Start is called before the first frame update
     void Start()
@@ -26,7 +27,14 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (currentHealth <= 0) {
+
+            disappearAfterDeathTime -= Time.deltaTime;
+            
+            if (disappearAfterDeathTime <= 0f) {
+                Destroy(gameObject);
+            }
+        }
     }
 
     public void TakeDamage(int val) {
@@ -41,15 +49,15 @@ public class Enemy : MonoBehaviour
     }
 
     void Die() {
-        Debug.Log("enemy died");
+        //Debug.Log("enemy died");
 
         animator.SetTrigger("Death");
 
-        GetComponent<Collider2D>().enabled = false;
-        this.enabled = false;
+        // GetComponent<Collider2D>().enabled = false;
+        // this.enabled = false;
 
         if (IsWerewolf) {
-            gm.WerewolfDefeatedSaveContinue();
+            gm.WerewolfDefeated();
         }
     }
 }

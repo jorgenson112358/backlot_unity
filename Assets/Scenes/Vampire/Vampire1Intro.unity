@@ -337,7 +337,7 @@ GameObject:
   - component: {fileID: 356702949}
   - component: {fileID: 356702951}
   - component: {fileID: 356702950}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Brick2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -730,7 +730,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 552329784}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: BrickPlatform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -769,7 +769,7 @@ GameObject:
   - component: {fileID: 654710434}
   - component: {fileID: 654710436}
   - component: {fileID: 654710435}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Brick4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1180,7 +1180,7 @@ GameObject:
   - component: {fileID: 1045629263}
   - component: {fileID: 1045629265}
   - component: {fileID: 1045629264}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: BrickDownLeft1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1419,7 +1419,7 @@ GameObject:
   - component: {fileID: 1791453218}
   - component: {fileID: 1791453220}
   - component: {fileID: 1791453219}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Brick1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1614,7 +1614,7 @@ GameObject:
   - component: {fileID: 1870264748}
   - component: {fileID: 1870264750}
   - component: {fileID: 1870264749}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Brick3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1809,7 +1809,7 @@ GameObject:
   - component: {fileID: 2008495311}
   - component: {fileID: 2008495313}
   - component: {fileID: 2008495312}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: BrickDownRight1
   m_TagString: Untagged
   m_Icon: {fileID: 0}

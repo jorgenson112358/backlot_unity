@@ -18,6 +18,10 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(SceneNamesEnum.WerewolfVillage1Intro.ToString());
     }
 
+    public void WerewolfDefeated() {
+        SceneManager.LoadScene(SceneNamesEnum.WerewolfVictory.ToString());
+    }
+
     public void WerewolfDefeatedSaveContinue() {
         SaveGame();
         SceneManager.LoadScene(SceneNamesEnum.Vampire1Intro.ToString());

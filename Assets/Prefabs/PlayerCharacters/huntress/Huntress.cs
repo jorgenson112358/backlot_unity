@@ -38,30 +38,32 @@ public class Huntress : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Time.time >= nextAttackTime) {
-            if (Input.GetButtonDown("Fire1")) {
-                Attack();
-                nextAttackTime = Time.time + 1f/ attackRate;
+        if (Health > 0) {
+            if (Time.time >= nextAttackTime) {
+                if (Input.GetButtonDown("Fire1")) {
+                    Attack();
+                    nextAttackTime = Time.time + 1f/ attackRate;
+                }
             }
-        }
-        // if (anim.isPlaying) {
-        //     return;
-        // }
+            // if (anim.isPlaying) {
+            //     return;
+            // }
 
-        horizontalMove = Input.GetAxisRaw("Horizontal") * moveSpeed;
-        animator.SetFloat("Speed", Mathf.Abs(horizontalMove));
+            horizontalMove = Input.GetAxisRaw("Horizontal") * moveSpeed;
+            animator.SetFloat("Speed", Mathf.Abs(horizontalMove));
 
-        if (Input.GetButtonDown("Jump")) {
-            //Debug.Log("jumping");
-            jumping = true;
-            animator.SetBool("isJumping", true);
-        }
+            if (Input.GetButtonDown("Jump")) {
+                //Debug.Log("jumping");
+                jumping = true;
+                animator.SetBool("isJumping", true);
+            }
 
-        if (Input.GetButtonDown("Crouch")) {
-            crouching = true;
-        } 
-        else if (Input.GetButtonUp("Crouch")) {
-            crouching = false;
+            if (Input.GetButtonDown("Crouch")) {
+                crouching = true;
+            } 
+            else if (Input.GetButtonUp("Crouch")) {
+                crouching = false;
+            }
         }
     }
 
@@ -96,8 +98,20 @@ public class Huntress : MonoBehaviour
         foreach(Collider2D enemy in hitEnemies) {
             Debug.Log("we hit " + enemy.name);
 
-            enemy.GetComponent<Enemy>().TakeDamage(weaponDamage);
+            if (enemy.tag.ToLower() == "mummy") {
+                enemy.GetComponent<Mummy>().TakeDamage(weaponDamage);
+            }
+            else {
+                enemy.GetComponent<Enemy>().TakeDamage(weaponDamage);
+            }
         }
+    }
 
+    public void TakeDamage(int dmg) {
+        Health -= dmg;
+
+        if (Health <= 0) {
+            SceneManager.LoadScene(SceneNamesEnum.Defeat.ToString());
+        }
     }
 }

@@ -13,6 +13,10 @@ public class GameManager : MonoBehaviour
         Debug.Log("Save not yet implemented");
     }
 
+    public void MummyDefeated() {
+        SceneManager.LoadScene(SceneNamesEnum.MummyVictory.ToString());
+    }
+
     public void MummyDefeatedSaveContinue() {
         SaveGame();
         SceneManager.LoadScene(SceneNamesEnum.WerewolfVillage1Intro.ToString());

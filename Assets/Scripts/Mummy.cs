@@ -2,13 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour
+public class Mummy : MonoBehaviour
 {
-    public int maxHealth = 100;
-    public int WerewolfMaxHealth = 200;
     public int MummyMaxHealth = 175;
-    private bool IsWerewolf = false;
-    private bool IsMummy = false;
     int currentHealth;
     public Animator animator;
     public GameManager gm;
@@ -27,30 +23,20 @@ public class Enemy : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (gameObject.tag == "Werewolf") {
-            currentHealth = WerewolfMaxHealth;
-            IsWerewolf = true;
-        }
-        else if (gameObject.tag == "Mummy") {
-            currentHealth = MummyMaxHealth;
-            IsMummy = true;
-        }
-        else {
-            currentHealth = maxHealth;
-        }
+        currentHealth = MummyMaxHealth;
 
         rb = GetComponent<Rigidbody2D>();
-        if (leftPatrolPoint != null) {
+        if (leftPatrolPoint != null && rightPatrolPoint != null) {
             destinationPoint = leftPatrolPoint.transform;
         }
-        //animator.SetBool("isMoving", true);
-        animator.SetInteger("AnimState", (int)BanditAnimState.Run);
     }
 
     // Update is called once per frame
     void Update()
     {
         if (currentHealth <= 0) {
+            animator.SetBool("IsWalking", false);
+            animator.SetTrigger("Dead");
             Debug.Log("Busy dying");
 
             disappearAfterDeathTime -= Time.deltaTime;
@@ -61,6 +47,7 @@ public class Enemy : MonoBehaviour
         }
         else {
             if (shouldPatrol && leftPatrolPoint != null && rightPatrolPoint != null) {
+                animator.SetBool("IsWalking", true);
                 Vector2 point = destinationPoint.position - transform.position;
                 if (destinationPoint == leftPatrolPoint.transform) {
                     rb.velocity = new Vector2(-speed, 0);
@@ -106,7 +93,6 @@ public class Enemy : MonoBehaviour
     //called from animation event on Heavy Bandit Attack animation
     public void DoneAttacking() {
         Debug.Log("Done attacking");
-        animator.SetInteger("AnimState", (int)BanditAnimState.CombatIdle);
         isAttacking = false;
     }
 
@@ -118,7 +104,6 @@ public class Enemy : MonoBehaviour
 
     public void TakeDamage(int val) {
         shouldPatrol = false;
-        animator.SetInteger("AnimState", (int)BanditAnimState.CombatIdle);
         currentHealth -= val;
 
         //play animation?
@@ -140,11 +125,6 @@ public class Enemy : MonoBehaviour
         // GetComponent<Collider2D>().enabled = false;
         // this.enabled = false;
 
-        if (IsWerewolf) {
-            gm.WerewolfDefeated();
-        }
-        else if (IsMummy) {
-            //gm.MummyDefeated();
-        }
+        //gm.MummyDefeated();
     }
 }

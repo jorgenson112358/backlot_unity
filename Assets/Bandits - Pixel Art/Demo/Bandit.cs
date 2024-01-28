@@ -1,6 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+public enum BanditAnimState {
+    Idle = 0,
+    CombatIdle = 1,
+    Run = 2
+}
+
 public class Bandit : MonoBehaviour {
 
     [SerializeField] float      m_speed = 4.0f;

@@ -26,6 +26,7 @@ public class Huntress : MonoBehaviour
     float nextAttackTime = 0f;
 
     public int Health = 100;
+    public GameManager gm;
 
     // Start is called before the first frame update
     void Start()
@@ -111,7 +112,8 @@ public class Huntress : MonoBehaviour
         Health -= dmg;
 
         if (Health <= 0) {
-            SceneManager.LoadScene(SceneNamesEnum.Defeat.ToString());
+            //SceneManager.LoadScene(SceneNamesEnum.Defeat.ToString());
+            gm.Defeat();
         }
     }
 }

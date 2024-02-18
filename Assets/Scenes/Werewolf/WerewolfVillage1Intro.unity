@@ -1035,8 +1035,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 100
   WerewolfMaxHealth: 200
+  MummyMaxHealth: 175
   animator: {fileID: 501002360}
   gm: {fileID: 176638603}
+  speed: 0
+  leftPatrolPoint: {fileID: 0}
+  rightPatrolPoint: {fileID: 0}
 --- !u!1 &514927269
 GameObject:
   m_ObjectHideFlags: 0
@@ -1389,7 +1393,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 2.1929133, y: 1}
+    m_SensorSize: {x: 2.0157385, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -1870,6 +1874,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1b8f01caea1e4544b3fde04885202f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gm: {fileID: 176638603}
 --- !u!61 &746720938
 BoxCollider2D:
   m_ObjectHideFlags: 0

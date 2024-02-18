@@ -53,5 +53,5 @@
         "temp/":true,
         "Temp/":true
     },
-    "workbench.colorTheme": "Monokai Dimmed"
+    "workbench.colorTheme": "Default Light+"
 }

@@ -51,7 +51,7 @@ public class Enemy : MonoBehaviour
     void Update()
     {
         if (currentHealth <= 0) {
-            Debug.Log("Busy dying");
+            //Debug.Log("Busy dying");
 
             disappearAfterDeathTime -= Time.deltaTime;
             
@@ -69,17 +69,19 @@ public class Enemy : MonoBehaviour
                     rb.velocity = new Vector2(speed, 0);
                 }
 
-                if (Vector2.Distance(transform.position, destinationPoint.position) < 0.5f && destinationPoint == leftPatrolPoint.transform) {
+                if (destinationPoint == leftPatrolPoint.transform && Vector2.Distance(transform.position, destinationPoint.position) < 0.5f) {
                     flipDirection();
                     destinationPoint = rightPatrolPoint.transform;
                 }
-                else if (Vector2.Distance(transform.position, destinationPoint.position) < 0.5f && destinationPoint == rightPatrolPoint.transform) {
+                else if (destinationPoint == rightPatrolPoint.transform && Vector2.Distance(transform.position, destinationPoint.position) < 0.5f) {
                     flipDirection();
                     destinationPoint = leftPatrolPoint.transform;
                 }
             }
             else {
                 Debug.Log("Not patrolling? What should happen here?");
+                //Combat Idle to Attack loop?
+                // chase able player?
             }
             // else if (animator.GetInteger("AnimState") == (int)BanditAnimState.CombatIdle) {
             //     Attack();
@@ -106,8 +108,10 @@ public class Enemy : MonoBehaviour
     //called from animation event on Heavy Bandit Attack animation
     public void DoneAttacking() {
         Debug.Log("Done attacking");
-        animator.SetInteger("AnimState", (int)BanditAnimState.CombatIdle);
         isAttacking = false;
+        if (currentHealth > 0) {
+            animator.SetInteger("AnimState", (int)BanditAnimState.CombatIdle);
+        }
     }
 
     private void flipDirection() {
@@ -117,18 +121,20 @@ public class Enemy : MonoBehaviour
     }
 
     public void TakeDamage(int val) {
-        shouldPatrol = false;
-        animator.SetInteger("AnimState", (int)BanditAnimState.CombatIdle);
-        currentHealth -= val;
+        if (currentHealth > 0) {
+            shouldPatrol = false;
+            animator.SetInteger("AnimState", (int)BanditAnimState.CombatIdle);
+            currentHealth -= val;
 
-        //play animation?
-        animator.SetTrigger("Hurt");
+            //play animation?
+            animator.SetTrigger("Hurt");
 
-        if (currentHealth <= 0) {
-            Die();
-        }
-        else {
-            Attack();
+            if (currentHealth <= 0) {
+                Die();
+            }
+            else {
+                Attack();
+            }
         }
     }
 

@@ -1,12 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
-public class TreasureBox : MonoBehaviour
+public class GameVictory : MonoBehaviour
 {
     public GameManager gm;
-
     // Start is called before the first frame update
     void Start()
     {
@@ -22,7 +20,7 @@ public class TreasureBox : MonoBehaviour
     void OnCollisionEnter2D(Collision2D collision) {
         if (collision.collider.CompareTag("Player")) {
             //SceneManager.LoadScene(SceneNamesEnum.MummyVictory.ToString());
-            gm.MummyDefeated();
+            gm.YouWin();
         }
     }
 }

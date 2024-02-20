@@ -23,10 +23,13 @@ public class Enemy : MonoBehaviour
     private bool shouldPatrol = true;
 
     private bool isAttacking = false;
+    private SpriteRenderer enemySpriteRen;
 
     // Start is called before the first frame update
     void Start()
     {
+        enemySpriteRen = GetComponent<SpriteRenderer>();
+        
         if (gameObject.tag == "Werewolf") {
             currentHealth = WerewolfMaxHealth;
             IsWerewolf = true;
@@ -69,13 +72,22 @@ public class Enemy : MonoBehaviour
                     rb.velocity = new Vector2(speed, 0);
                 }
 
-                if (destinationPoint == leftPatrolPoint.transform && Vector2.Distance(transform.position, destinationPoint.position) < 0.5f) {
-                    flipDirection();
-                    destinationPoint = rightPatrolPoint.transform;
+                if (destinationPoint == leftPatrolPoint.transform) {
+                    float dist = Vector2.Distance(transform.position, destinationPoint.position);
+                    //Debug.Log("Dist to left: " + dist);
+                    if (dist < 0.5f) {
+                        destinationPoint = rightPatrolPoint.transform;
+                        flipDirection(true);
+                    }
                 }
-                else if (destinationPoint == rightPatrolPoint.transform && Vector2.Distance(transform.position, destinationPoint.position) < 0.5f) {
-                    flipDirection();
-                    destinationPoint = leftPatrolPoint.transform;
+                else if (destinationPoint == rightPatrolPoint.transform)
+                {
+                    float dist = Vector2.Distance(transform.position, destinationPoint.position);
+                    //Debug.Log("Dist to right: " + dist);
+                    if (dist < 0.5f) {
+                        destinationPoint = leftPatrolPoint.transform;
+                        flipDirection(false);
+                    }
                 }
             }
             else {
@@ -114,10 +126,13 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    private void flipDirection() {
-        Vector3 localScale = transform.localScale;
-        localScale.x *= -1;
-        transform.localScale = localScale;
+    private void flipDirection(bool flip) {
+        // Vector3 localScale = transform.localScale;
+        // localScale.x *= -1;
+        // transform.localScale = localScale;
+        Debug.Log("flipping " + flip);
+        enemySpriteRen.flipX = flip;
+
     }
 
     public void TakeDamage(int val) {

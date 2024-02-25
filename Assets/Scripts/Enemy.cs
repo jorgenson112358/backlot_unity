@@ -91,7 +91,7 @@ public class Enemy : MonoBehaviour
                 }
             }
             else {
-                Debug.Log("Not patrolling? What should happen here?");
+                //Debug.Log("Not patrolling? What should happen here?");
                 //Combat Idle to Attack loop?
                 // chase able player?
             }
@@ -122,7 +122,7 @@ public class Enemy : MonoBehaviour
         Debug.Log("Done attacking");
         isAttacking = false;
         if (currentHealth > 0) {
-            animator.SetInteger("AnimState", (int)BanditAnimState.CombatIdle);
+            //animator.SetInteger("AnimState", (int)BanditAnimState.CombatIdle);
         }
     }
 
@@ -137,12 +137,13 @@ public class Enemy : MonoBehaviour
 
     public void TakeDamage(int val) {
         if (currentHealth > 0) {
+            Debug.Log("taking damage: " + val);
             shouldPatrol = false;
-            animator.SetInteger("AnimState", (int)BanditAnimState.CombatIdle);
             currentHealth -= val;
+            //animator.SetInteger("AnimState", (int)BanditAnimState.CombatIdle);
 
             //play animation?
-            animator.SetTrigger("Hurt");
+            //animator.SetTrigger("Hurt");
 
             if (currentHealth <= 0) {
                 Die();
@@ -154,7 +155,7 @@ public class Enemy : MonoBehaviour
     }
 
     void Die() {
-        //Debug.Log("enemy died");
+        Debug.Log("enemy died");
 
         animator.SetTrigger("Death");
 

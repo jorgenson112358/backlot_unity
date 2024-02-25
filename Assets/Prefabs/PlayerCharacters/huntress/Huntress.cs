@@ -97,7 +97,7 @@ public class Huntress : MonoBehaviour
 
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
         foreach(Collider2D enemy in hitEnemies) {
-            Debug.Log("we hit " + enemy.name);
+            Debug.Log("huntress attack hits " + enemy.name);
 
             if (enemy.tag.ToLower() == "mummy") {
                 enemy.GetComponent<Mummy>().TakeDamage(weaponDamage);
@@ -110,6 +110,8 @@ public class Huntress : MonoBehaviour
 
     public void TakeDamage(int dmg) {
         Health -= dmg;
+
+        Debug.Log("Huntress health: " + Health);
 
         if (Health <= 0) {
             //SceneManager.LoadScene(SceneNamesEnum.Defeat.ToString());

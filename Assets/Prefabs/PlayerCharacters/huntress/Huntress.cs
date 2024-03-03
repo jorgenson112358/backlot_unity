@@ -27,6 +27,7 @@ public class Huntress : MonoBehaviour
 
     public int Health = 100;
     public GameManager gm;
+    public Scoring scoreUI;
 
     // Start is called before the first frame update
     void Start()
@@ -102,6 +103,9 @@ public class Huntress : MonoBehaviour
             if (enemy.tag.ToLower() == "mummy") {
                 enemy.GetComponent<Mummy>().TakeDamage(weaponDamage);
             }
+            else if (enemy.tag.ToLower() == "werewolf") {
+                enemy.GetComponent<SandboxWerewolf>().TakeDamage(weaponDamage);
+            }
             else {
                 enemy.GetComponent<Enemy>().TakeDamage(weaponDamage);
             }
@@ -112,6 +116,8 @@ public class Huntress : MonoBehaviour
         Health -= dmg;
 
         Debug.Log("Huntress health: " + Health);
+
+        scoreUI.UpdateScore(Health);
 
         if (Health <= 0) {
             //SceneManager.LoadScene(SceneNamesEnum.Defeat.ToString());

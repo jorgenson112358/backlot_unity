@@ -98,4 +98,31 @@ public class SandboxWerewolf : MonoBehaviour
     // private void OnDrawGizmos() {
     //     Gizmos.DrawWireSphere(attackPoint.position, attackRange);
     // }
+
+    void Die() {
+        Debug.Log("Sandbox WW died");
+
+        //animator.SetTrigger("Death");
+
+        // GetComponent<Collider2D>().enabled = false;
+        // this.enabled = false;
+
+        // if (IsWerewolf) {
+        //     gm.WerewolfDefeated();
+        // }
+        // else if (IsMummy) {
+        //     //gm.MummyDefeated();
+        // }
+
+        Destroy(gameObject);
+    }
+
+    public void TakeDamage(int dmg) {
+        currentHealth -= dmg;
+        Debug.Log("WW hit for " + dmg + " and health left: " + currentHealth);
+
+        if (currentHealth <= 0) {
+            Die();
+        }
+    }
 }

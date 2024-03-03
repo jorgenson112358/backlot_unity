@@ -25,9 +25,12 @@ public class Huntress : MonoBehaviour
     public float attackRate = 2f;
     float nextAttackTime = 0f;
 
+    public int MaxHealth = 100;
     public int Health = 100;
     public GameManager gm;
     public Scoring scoreUI;
+
+    private int healthPotCount = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -122,6 +125,17 @@ public class Huntress : MonoBehaviour
         if (Health <= 0) {
             //SceneManager.LoadScene(SceneNamesEnum.Defeat.ToString());
             gm.Defeat();
+        }
+    }
+
+    public void PickupHealthPot(int amount) {
+        if ( (Health + amount) < MaxHealth) {
+            // just drink the pot since we can use all of it
+            Health += amount;
+        }
+        else {
+            healthPotCount += 1;
+            scoreUI.UpdatePotCount(healthPotCount);
         }
     }
 }

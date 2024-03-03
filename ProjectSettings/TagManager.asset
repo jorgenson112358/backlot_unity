@@ -8,6 +8,7 @@ TagManager:
   - Ground
   - Werewolf
   - Mummy
+  - HealthPot
   layers:
   - Default
   - TransparentFX
@@ -21,7 +22,7 @@ TagManager:
   - Foreground
   - Ground
   - Enemy
-  - 
+  - Items
   - 
   - 
   - 
@@ -56,4 +57,7 @@ TagManager:
     locked: 0
   - name: Player
     uniqueID: 2493041431
+    locked: 0
+  - name: Items
+    uniqueID: 787620449
     locked: 0

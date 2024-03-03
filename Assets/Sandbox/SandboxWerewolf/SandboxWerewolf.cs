@@ -23,7 +23,13 @@ public class SandboxWerewolf : MonoBehaviour
 
     private System.Random rand;
     public Transform attackPoint;
-    public float attackRange = 0.5f;
+    //this influences how big around the attackPoint a radius is checked
+    // during WWAttackHitCheck(), which if too large could cause multiple
+    // colliders on the player to be hit, it could still happen if the player
+    // is jumping but I'm gonna allow that, I guess that too could be removed
+    // with some simple boolean check in the hit fn that prevents multiple
+    // hits to the same targetLayer
+    public float attackRange = 0.1f;
 
 
     // Start is called before the first frame update
@@ -63,13 +69,15 @@ public class SandboxWerewolf : MonoBehaviour
         animator.SetTrigger("isAttacking");
     }
 
+    // animation event on attack animation frame, that little white tick mark
+    // firing twice for some reason
     public void WWAttackHitCheck() {
         Debug.Log("WW Attack Hit Check");
         int dmg = rand.Next(1, maxAttackDamage);
 
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, targetLayers);
         foreach(Collider2D enemy in hitEnemies) {
-            Debug.Log("WW hit " + enemy.name);
+            //Debug.Log("WW hit " + enemy.name);
             enemy.GetComponent<Huntress>().TakeDamage(dmg);
         }
     }
@@ -85,4 +93,9 @@ public class SandboxWerewolf : MonoBehaviour
         isJumping = false;
         timeToNextJump = Time.time + JumpRate;
     }
+
+    /* debugging help to visualize on screen, works in Scene mode in animator */
+    // private void OnDrawGizmos() {
+    //     Gizmos.DrawWireSphere(attackPoint.position, attackRange);
+    // }
 }

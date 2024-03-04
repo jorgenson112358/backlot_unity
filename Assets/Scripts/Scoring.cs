@@ -13,8 +13,8 @@ public class Scoring : MonoBehaviour
         
     }
 
-    public void UpdateScore(int playerHealth) {
-        string output = string.Format("Health {0}", playerHealth);
+    public void UpdateScore(int playerHealth, int playerMaxHealth) {
+        string output = string.Format("Health {0}/{1}", playerHealth, playerMaxHealth);
 
         score.text = output;
     }

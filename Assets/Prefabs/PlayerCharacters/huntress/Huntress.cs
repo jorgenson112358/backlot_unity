@@ -26,7 +26,7 @@ public class Huntress : MonoBehaviour
     float nextAttackTime = 0f;
 
     public int MaxHealth = 100;
-    public int Health = 100;
+    private int currentHealth;
     public GameManager gm;
     public Scoring scoreUI;
 
@@ -38,12 +38,15 @@ public class Huntress : MonoBehaviour
         //controller = gameObject.Get
         //anim = gameObject.GetComponent<Animation>();
         //anim["spin"].layer = 123;
+
+        currentHealth = MaxHealth;
+        scoreUI.UpdateScore(currentHealth, MaxHealth);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Health > 0) {
+        if (currentHealth > 0) {
             if (Time.time >= nextAttackTime) {
                 if (Input.GetButtonDown("Fire1")) {
                     Attack();
@@ -116,22 +119,31 @@ public class Huntress : MonoBehaviour
     }
 
     public void TakeDamage(int dmg) {
-        Health -= dmg;
+        UpdateHealth(dmg, true);
 
-        Debug.Log("Huntress health: " + Health);
-
-        scoreUI.UpdateScore(Health);
-
-        if (Health <= 0) {
+        if (currentHealth <= 0) {
             //SceneManager.LoadScene(SceneNamesEnum.Defeat.ToString());
             gm.Defeat();
         }
     }
 
+    private void UpdateHealth(int amt, bool isDamage) {
+        if (isDamage) {
+            currentHealth -= amt;
+        }
+        else {
+            currentHealth += amt;
+        }
+
+        scoreUI.UpdateScore(currentHealth, MaxHealth);
+    }
+
+    // do I want to have pots of different values?
     public void PickupHealthPot(int amount) {
-        if ( (Health + amount) < MaxHealth) {
+        //Debug.Log("health pot picked up");
+        if ( (currentHealth + amount) < MaxHealth) {
             // just drink the pot since we can use all of it
-            Health += amount;
+            UpdateHealth(amount, false);
         }
         else {
             healthPotCount += 1;

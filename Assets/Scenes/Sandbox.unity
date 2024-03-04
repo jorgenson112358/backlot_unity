@@ -476,6 +476,11 @@ PrefabInstance:
       propertyPath: scoreUI
       value: 
       objectReference: {fileID: 861617693}
+    - target: {fileID: 4205531320057472729, guid: fe98445f798fc254ba1f6bd0d79ca1da,
+        type: 3}
+      propertyPath: MaxHealth
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 4205531320057472730, guid: fe98445f798fc254ba1f6bd0d79ca1da,
         type: 3}
       propertyPath: m_Size.y
@@ -947,7 +952,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Health: 100'
+  m_text: 'Health: 100/100'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: 8b29aaa3eec7468097ff07adfcf29ac9, type: 2}
@@ -1010,7 +1015,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: -10.487122, y: 0, z: 0, w: 0}
+  m_margin: {x: -80.8208, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -3055,7 +3060,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   AttackRate: 4
-  maxAttackDamage: 25
+  maxAttackDamage: 4
   JumpRate: 5
   NeedsToJumpDistance: 2
   MaxJumpDistance: 10

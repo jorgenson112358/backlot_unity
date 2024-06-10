@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MummyCaptain : MonoBehaviour
+public class SkeletonWarrior : MonoBehaviour
 {
     int currentHealth;
     public int MaxHealth = 21;
@@ -13,8 +13,8 @@ public class MummyCaptain : MonoBehaviour
     public LayerMask targetLayers;
     public Transform attackPoint;
     public float attackRange = 0.1f;
+    
     private System.Random rand;
-
     // Start is called before the first frame update
     void Start()
     {
@@ -37,7 +37,7 @@ public class MummyCaptain : MonoBehaviour
     }
 
     public void AttackHitCheck() {
-        Debug.Log("mumcap Attack Hit Check");
+        Debug.Log("skelwar Attack Hit Check");
         int dmg = rand.Next(1, MaxAttackDamage);
 
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, targetLayers);
@@ -49,9 +49,7 @@ public class MummyCaptain : MonoBehaviour
 
     public void Attack() {
         Debug.Log("in attack()");
-        if (currentHealth > 0) {
-            animator.SetTrigger("isAttacking");
-        }
+        animator.SetTrigger("AttackTrigger");
     }
 
     public void TakeDamage(int val) {
@@ -71,13 +69,13 @@ public class MummyCaptain : MonoBehaviour
     }
 
     void Die() {
-        Debug.Log("mumcap died");
+        Debug.Log("skelwar died");
 
-        animator.SetTrigger("isDying");
+        animator.SetTrigger("DeathTrigger");
     }
 
-    /* debugging help to visualize on screen, works in Scene mode in animator */
-    private void OnDrawGizmos() {
-        Gizmos.DrawWireSphere(attackPoint.position, attackRange);
-    }
+        /* debugging help to visualize on screen, works in Scene mode in animator */
+        // private void OnDrawGizmos() {
+        //     Gizmos.DrawWireSphere(attackPoint.position, attackRange);
+        // }
 }

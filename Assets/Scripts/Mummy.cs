@@ -47,8 +47,10 @@ public class Mummy : MonoBehaviour
         }
         else {
             if (shouldPatrol && leftPatrolPoint != null && rightPatrolPoint != null) {
+                //Debug.Log("walking");
                 animator.SetBool("IsWalking", true);
                 Vector2 point = destinationPoint.position - transform.position;
+                //Debug.Log(point);
                 if (destinationPoint == leftPatrolPoint.transform) {
                     rb.velocity = new Vector2(-speed, 0);
                 }
@@ -56,11 +58,15 @@ public class Mummy : MonoBehaviour
                     rb.velocity = new Vector2(speed, 0);
                 }
 
+                //Debug.Log("TP: " + transform.position);
+                //Debug.Log("DP: " + destinationPoint.position);
                 if (Vector2.Distance(transform.position, destinationPoint.position) < 0.5f && destinationPoint == leftPatrolPoint.transform) {
+                    //Debug.Log("flipping to right");
                     flipDirection();
                     destinationPoint = rightPatrolPoint.transform;
                 }
                 else if (Vector2.Distance(transform.position, destinationPoint.position) < 0.5f && destinationPoint == rightPatrolPoint.transform) {
+                    //Debug.Log("flipping to left");
                     flipDirection();
                     destinationPoint = leftPatrolPoint.transform;
                 }
@@ -127,4 +133,9 @@ public class Mummy : MonoBehaviour
 
         //gm.MummyDefeated();
     }
+
+    /* debugging help to visualize on screen, works in Scene mode in animator */
+    // private void OnDrawGizmos() {
+    //     Gizmos.DrawWireSphere(transform.position, 0.5f);
+    // }
 }

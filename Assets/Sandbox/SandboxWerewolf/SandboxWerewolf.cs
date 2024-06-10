@@ -31,6 +31,7 @@ public class SandboxWerewolf : MonoBehaviour
     // hits to the same targetLayer
     public float attackRange = 0.1f;
 
+    public GameManager gm;
 
     // Start is called before the first frame update
     void Start()
@@ -113,6 +114,8 @@ public class SandboxWerewolf : MonoBehaviour
         // else if (IsMummy) {
         //     //gm.MummyDefeated();
         // }
+
+        gm.WerewolfDefeated();
 
         Destroy(gameObject);
     }

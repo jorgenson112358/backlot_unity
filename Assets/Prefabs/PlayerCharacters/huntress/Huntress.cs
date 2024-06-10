@@ -26,7 +26,7 @@ public class Huntress : MonoBehaviour
     float nextAttackTime = 0f;
 
     public int MaxHealth = 100;
-    private int currentHealth;
+    public int currentHealth;
     public GameManager gm;
     public Scoring scoreUI;
 
@@ -40,6 +40,9 @@ public class Huntress : MonoBehaviour
         //anim["spin"].layer = 123;
 
         currentHealth = MaxHealth;
+        Debug.Log(currentHealth);
+        Debug.Log(MaxHealth);
+        Debug.Log(scoreUI);
         scoreUI.UpdateScore(currentHealth, MaxHealth);
     }
 
@@ -71,6 +74,10 @@ public class Huntress : MonoBehaviour
             } 
             else if (Input.GetButtonUp("Crouch")) {
                 crouching = false;
+            }
+
+            if (Input.GetButtonDown("HealthPot")) {
+                DrinkHealthPot();
             }
         }
     }
@@ -113,16 +120,19 @@ public class Huntress : MonoBehaviour
                 enemy.GetComponent<SandboxWerewolf>().TakeDamage(weaponDamage);
             }
             else {
-                enemy.GetComponent<Enemy>().TakeDamage(weaponDamage);
+                //enemy.GetComponent<Enemy>().TakeDamage(weaponDamage);
+                enemy.gameObject.SendMessage("TakeDamage", weaponDamage);
             }
         }
     }
 
     public void TakeDamage(int dmg) {
+        Debug.Log("Huntress hit for " + dmg);
         UpdateHealth(dmg, true);
 
         if (currentHealth <= 0) {
             //SceneManager.LoadScene(SceneNamesEnum.Defeat.ToString());
+            Debug.Log("DEFEAT!");
             gm.Defeat();
         }
     }
@@ -132,7 +142,12 @@ public class Huntress : MonoBehaviour
             currentHealth -= amt;
         }
         else {
-            currentHealth += amt;
+            if ( (currentHealth + amt) > MaxHealth) {
+                currentHealth = MaxHealth;
+            }
+            else {
+                currentHealth += amt;
+            }
         }
 
         scoreUI.UpdateScore(currentHealth, MaxHealth);
@@ -140,13 +155,22 @@ public class Huntress : MonoBehaviour
 
     // do I want to have pots of different values?
     public void PickupHealthPot(int amount) {
-        //Debug.Log("health pot picked up");
-        if ( (currentHealth + amount) < MaxHealth) {
-            // just drink the pot since we can use all of it
-            UpdateHealth(amount, false);
-        }
-        else {
+        // //Debug.Log("health pot picked up");
+        // if ( (currentHealth + amount) < MaxHealth) {
+        //     // just drink the pot since we can use all of it
+        //     UpdateHealth(amount, false);
+        // }
+        // else {
             healthPotCount += 1;
+            scoreUI.UpdatePotCount(healthPotCount);
+        //}
+    }
+
+    private void DrinkHealthPot() {
+        if (healthPotCount > 0) {
+            UpdateHealth(8, false);
+
+            healthPotCount -= 1;
             scoreUI.UpdatePotCount(healthPotCount);
         }
     }

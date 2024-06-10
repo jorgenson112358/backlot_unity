@@ -24,6 +24,10 @@ public class Enemy : MonoBehaviour
 
     private bool isAttacking = false;
     private SpriteRenderer enemySpriteRen;
+    public int weaponDamage = 5;
+    public LayerMask targetLayers;
+    public Transform attackPoint;
+    public float attackRange = 0.1f;
 
     // Start is called before the first frame update
     void Start()
@@ -101,6 +105,16 @@ public class Enemy : MonoBehaviour
         }
     }
 
+    public void AttackHitCheck() {
+        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, targetLayers);
+        foreach(Collider2D enemy in hitEnemies) {
+            Debug.Log("enemy dude hit " + enemy.name);
+
+            enemy.GetComponent<Huntress>().TakeDamage(weaponDamage);
+        }
+
+    }
+
     private void Attack() {
         if (isAttacking == false) {
             Debug.Log("Attacking");
@@ -108,13 +122,6 @@ public class Enemy : MonoBehaviour
             
             isAttacking = true;
         }
-
-        // Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
-        // foreach(Collider2D enemy in hitEnemies) {
-        //     Debug.Log("we hit " + enemy.name);
-
-        //     enemy.GetComponent<Enemy>().TakeDamage(weaponDamage);
-        // }
     }
 
     //called from animation event on Heavy Bandit Attack animation
@@ -130,7 +137,7 @@ public class Enemy : MonoBehaviour
         // Vector3 localScale = transform.localScale;
         // localScale.x *= -1;
         // transform.localScale = localScale;
-        Debug.Log("flipping " + flip);
+        //Debug.Log("flipping " + flip);
         enemySpriteRen.flipX = flip;
 
     }
@@ -168,5 +175,10 @@ public class Enemy : MonoBehaviour
         else if (IsMummy) {
             //gm.MummyDefeated();
         }
+    }
+
+    /* debugging help to visualize on screen, works in Scene mode in animator */
+    private void OnDrawGizmos() {
+        Gizmos.DrawWireSphere(attackPoint.position, attackRange);
     }
 }

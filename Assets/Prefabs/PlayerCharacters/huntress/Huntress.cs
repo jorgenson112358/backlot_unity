@@ -174,4 +174,8 @@ public class Huntress : MonoBehaviour
             scoreUI.UpdatePotCount(healthPotCount);
         }
     }
+
+    public int GetHealthPotCount() {
+        return healthPotCount;
+    }
 }
